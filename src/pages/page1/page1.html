@@ -3,16 +3,29 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Page One</ion-title>
+    <ion-title>Space!</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <h3>Latest Space Pics</h3>
+  
+  <ion-item>
+    <space-text [babelfish]="hitchhiker" (translate)="doIt($event)"></space-text>
+  </ion-item>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-list>
+    <ion-item class="text-wrap" *ngFor="let child of spaceChildren">
+      <ion-thumbnail item-left>
+        <img [src]="child.data.thumbnail"/>
+      </ion-thumbnail>
+      <h3>{{child.data.title | greekPlanets}}</h3>
+      <button ion-button icon-only item-right primary (click)="loadDetails(child.data)"><ion-icon name="planet" item-left></ion-icon></button>
+    </ion-item>
+  </ion-list>
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button secondary (click)="loadModal()">Load Modal</button>
+  <br/>
+  
 </ion-content>
